@@ -1,8 +1,13 @@
 'use strict';
 
+var cons = require('consolidate');
+// var config = require('./config')
 var express = require('express');
+var routes = require('./routes');
+
 
 var app = module.exports = express();
+
 
 /*
  * Middlewares
@@ -10,17 +15,13 @@ var app = module.exports = express();
 // config
 // log
 
+// Configure template engine
+app.engine('hbs', cons.handlebars);
+app.set('view engine', 'hbs');
 
-/*
- * Routes
- */
+// load routes
+app.use(routes);
 
-app.get('/hello.txt', function(req, res){
-    var body = 'Hello World';
-    res.setHeader('Content-Type', 'text/plain');
-    res.setHeader('Content-Length', body.length);
-    res.end(body);
-});
 
 // Main form
 
