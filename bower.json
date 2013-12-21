@@ -1,6 +1,7 @@
 {
-  "name": "foundation-libsass-template",
+  "name": "MailTester",
   "dependencies": {
-    "foundation": "zurb/bower-foundation"
+    "foundation": "5.0.2",
+    "requirejs": "2.1.9"
   }
 }
