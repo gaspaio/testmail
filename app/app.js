@@ -59,7 +59,6 @@ app.use('/assets', express.static(path.resolve(basedir, 'public', 'assets')));
 // Client-side app
 app.use(express.static(path.resolve(basedir, 'client')));
 
-
 // Load Routes
 app.use(logger.requestLogger);
 app.get('/', routes.index);

@@ -1,3 +1,89 @@
 {{> top }}
-<div class="container" ui-view>hello</div>
+
+<nav class="top-bar" data-topbar>
+
+  <ul class="title-area">
+    <li class="name"><h1><a href="#">{{ app-title }}</a></h1></li>
+  </ul>
+  <section class="top-bar-section">
+    <ul class="right">
+      <li class="divider"></li>
+      <li class="has-form"><a href="#" class="button small">New mail</a></li>
+    </ul>
+  </section>
+
+</nav>
+
+<form>
+  <div id="main-form-container" class="row">
+    <div class="medium-10 columns">
+      <div class="row">
+        <div class="large-6 columns">
+          <div class="row collapse">
+            <div class="small-2 columns">
+              <span class="prefix"><label>Send to</label></span>
+            </div>
+            <div class="small-10 columns">
+              <input type="text" placeholder="E-mail address">
+            </div>
+          </div>
+        </div>
+        <div class="large-6 columns">
+          <div class="row collapse">
+            <div class="small-2 columns">
+              <span class="prefix"><label>Reply to</label></span>
+            </div>
+            <div class="small-10 columns">
+              <input type="text" placeholder="E-mail address">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row collapse">
+        <div class="small-2 large-1 columns">
+          <span class="prefix"><label>Subject</label></span>
+        </div>
+        <div class="small-10 large-11 columns">
+          <input type="text">
+        </div>
+      </div>
+    </div>
+    <div id="main-form-buttons" class="medium-2 columns">
+        <input type="submit" class="button small" value="Send mail">
+        <input type="button" class="button small secondary" value="Reset form">
+    </div>
+    <hr />
+  </div>
+  <div class="row">
+    <div class="small-12 columns">
+      <label>HTML content</label>
+      <textarea id="html-container">
+<html style="color: green">
+<!-- this is a comment -->
+<head>
+  <title>Mixed HTML Example</title>
+  <style type="text/css">
+    h1 {font-family: comic sans; color: #f0f;}
+    div {background: yellow !important;}
+    body {
+      max-width: 50em;
+      margin: 1em 2em 1em 5em;
+    }
+  </style>
+</head>
+<body>
+<h1>Mixed HTML Example</h1>
+<script>
+  function jsFunc(arg1, arg2) {
+    if (arg1 && arg2) document.body.innerHTML = "achoo";
+  }
+</script>
+</body>
+</html>
+      </textarea>
+    </div>
+  </div>
+</form>
+
+
 {{> bottom }}

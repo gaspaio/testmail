@@ -1,0 +1,17 @@
+#main-form-container {
+  margin-top: $column-gutter;
+}
+
+#main-form-buttons input {
+  width: 100%;
+  padding: 0;
+  line-height: 2.3125rem;
+  margin-bottom: 1rem;
+}
+
+.CodeMirror {
+  font-size: 0.75rem;
+  height: 500px;
+  border: 1px solid rgb(216, 216, 216);
+}
+

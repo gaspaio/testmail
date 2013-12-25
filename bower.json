@@ -1,6 +1,7 @@
 {
   "name": "MailTester",
   "dependencies": {
+    "codemirror": "~3.20.0",
     "foundation": "5.0.2",
     "requirejs": "2.1.9"
   }
