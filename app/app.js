@@ -8,6 +8,7 @@ var path = require('path');
 var winston = require('winston');
 
 var logger = require('./middleware/logger');
+var error = require('./middleware/error');
 var routes = require('./routes');
 
 var app = module.exports = express();
@@ -67,4 +68,6 @@ app.use(express.static(path.resolve(basedir, 'client')));
 app.use(logger.requestLogger);
 app.get('/', routes.index);
 app.post('/', routes.post);
+app.use(error.format);
 app.use(logger.errorLogger);
+app.use(error.handler);

@@ -12,9 +12,14 @@ module.exports.errorLogger =  function(err, req, res, next) {
     next(err);
   }
 
-  // Let winston gather all the error data.
-  var exceptionMeta = logger.exception.getAllInfo(err);
-  logger.error('Exception', exceptionMeta);
+  // Only log internal errors.
+  if (500 > statusCode) {
+    next(err);
+  }
+
+  // Let winston gather all the error data, if none is present.
+  err.inner = err.inner || logger.exception.getAllInfo(err);
+  logger.error('Exception', err.inner);
   next(err);
 };
 

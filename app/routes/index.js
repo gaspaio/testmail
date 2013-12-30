@@ -1,6 +1,10 @@
 'use strict';
 
-exports.index = function(req, res) {
+var util = require('util');
+
+exports.index = function(req, res, next) {
+
+  next(new Error("bingo"));
 
   res.render('app', {
     partials: {
@@ -12,23 +16,17 @@ exports.index = function(req, res) {
 }
 
 
-exports.post = function(req, res) {
+exports.post = function(req, res, next) {
 
   var errors = getFormErrors(req);
 
-  res.send({msg: 'Email sent'});
-
-  // Handle all errors the same way !
-  // Throw Exception && add type + params {msg: ... , type: validation/system params: ...}
-  /* if (empty) {
-
+  if (null !== errors) {
+    var err = new Error('Invalid field values');
+    err.inner = errors;
+    next(err);
   }
-  else {
-    -> send 400 Bad Request
-    -> errors
-  }
-  */
 
+  res.json({msg: util.format('Email sent to %s.', req.checkBody('sendTo'))});
 }
 
 
