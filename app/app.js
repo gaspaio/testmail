@@ -1,12 +1,14 @@
 'use strict';
 
 var cons = require('consolidate');
-var config = require('nconf')
+var validator = require('express-validator');
 var express = require('express');
+var config = require('nconf')
 var path = require('path');
-var routes = require('./routes');
 var winston = require('winston');
+
 var logger = require('./middleware/logger');
+var routes = require('./routes');
 
 var app = module.exports = express();
 
@@ -50,6 +52,8 @@ winston.add(winston.transports.File, {
 });
 app.set('logger', winston);
 
+app.use(express.urlencoded());
+app.use(validator());
 
 // Static files
 app.use(express.static(__dirname + '../public'));
@@ -62,8 +66,5 @@ app.use(express.static(path.resolve(basedir, 'client')));
 // Load Routes
 app.use(logger.requestLogger);
 app.get('/', routes.index);
-
-// app.post
-// static files
-
+app.post('/', routes.post);
 app.use(logger.errorLogger);

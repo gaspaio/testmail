@@ -14,7 +14,7 @@
 
 </nav>
 
-<form>
+<form id="main-form" action="/" data-abide>
   <div id="main-form-container" class="row">
     <div class="medium-10 columns">
       <div class="row">
@@ -24,7 +24,8 @@
               <span class="prefix"><label>Send to</label></span>
             </div>
             <div class="small-10 columns">
-              <input type="text" placeholder="E-mail address">
+              <input name="sendTo" type="email" placeholder="E-mail address" required>
+              <small class="error">A valid email address is required.</small>
             </div>
           </div>
         </div>
@@ -34,7 +35,8 @@
               <span class="prefix"><label>Reply to</label></span>
             </div>
             <div class="small-10 columns">
-              <input type="text" placeholder="E-mail address">
+              <input name="replyTo" type="email" placeholder="E-mail address">
+              <small class="error">Invalid email address.</small>
             </div>
           </div>
         </div>
@@ -44,43 +46,20 @@
           <span class="prefix"><label>Subject</label></span>
         </div>
         <div class="small-10 large-11 columns">
-          <input type="text">
+          <input name="subject" type="text">
         </div>
       </div>
     </div>
     <div id="main-form-buttons" class="medium-2 columns">
-        <input type="submit" class="button small" value="Send mail">
-        <input type="button" class="button small secondary" value="Reset form">
+        <input id="main-form-submit" type="submit" class="button small" value="Send mail" />
+        <input type="button" class="button small secondary" value="Reset form" />
     </div>
     <hr />
   </div>
   <div class="row">
     <div class="small-12 columns">
       <label>HTML content</label>
-      <textarea id="html-container">
-<html style="color: green">
-<!-- this is a comment -->
-<head>
-  <title>Mixed HTML Example</title>
-  <style type="text/css">
-    h1 {font-family: comic sans; color: #f0f;}
-    div {background: yellow !important;}
-    body {
-      max-width: 50em;
-      margin: 1em 2em 1em 5em;
-    }
-  </style>
-</head>
-<body>
-<h1>Mixed HTML Example</h1>
-<script>
-  function jsFunc(arg1, arg2) {
-    if (arg1 && arg2) document.body.innerHTML = "achoo";
-  }
-</script>
-</body>
-</html>
-      </textarea>
+      <textarea id="html-container" name="htmlContent"></textarea>
     </div>
   </div>
 </form>

@@ -2,19 +2,28 @@
 
 (function () {
   require.config({
-    baseUrl: '/',
+    baseUrl: '/bower_components',
     paths: {
-      'jquery'    : 'bower_components/jquery/jquery.min',
-      'foundation': 'bower_components/foundation/js/foundation.min',
-      'codemirror': 'bower_components/codemirror/lib/codemirror',
-      'codemirror-htmlmixed': 'bower_components/codemirror/mode/htmlmixed/htmlmixed',
-      'codemirror-xml': 'bower_components/codemirror/mode/xml/xml',
-      'codemirror-css': 'bower_components/codemirror/mode/css/css',
-      'codemirror-js': 'bower_components/codemirror/mode/javascript/javascript'
+      'jquery'    : 'jquery/jquery.min',
+      'foundation': 'foundation/js/foundation.min',
+      'codemirror': 'codemirror/lib/codemirror',
+      'codemirror-htmlmixed': 'codemirror/mode/htmlmixed/htmlmixed',
+      'codemirror-xml': 'codemirror/mode/xml/xml',
+      'codemirror-css': 'codemirror/mode/css/css',
+      'codemirror-js': 'codemirror/mode/javascript/javascript'
     },
     shim: {
       'foundation': {
         deps: ['jquery']
+      },
+      'codemirror-xml': {
+        deps: ['codemirror']
+      },
+      'codemirror-css': {
+        deps: ['codemirror']
+      },
+      'codemirror-js': {
+        deps: ['codemirror']
       },
       'codemirror-htmlmixed': {
         deps: ['codemirror', 'codemirror-xml', 'codemirror-css', 'codemirror-js']
