@@ -14,9 +14,14 @@ exports.index = function(req, res) {
 
 exports.post = function(req, res) {
 
-  var errors = validateForm(req);
+  var errors = getFormErrors(req);
+
+  res.send({msg: 'Email sent'});
+
+  // Handle all errors the same way !
+  // Throw Exception && add type + params {msg: ... , type: validation/system params: ...}
   /* if (empty) {
-   res.send({msg: 'Email sent'});
+
   }
   else {
     -> send 400 Bad Request
@@ -27,13 +32,14 @@ exports.post = function(req, res) {
 }
 
 
-function validateForm(req) {
+function getFormErrors(req) {
 
   var errors = {};
 
   req.checkBody('sendTo').notEmpty();
   errors = req.validationErrors(true);
-  if (!errors.hasOwnProperty('sendTo')) {
+  if (errors !== null
+      && !errors.hasOwnProperty('sendTo')) {
     req.checkBody('sendTo').isEmail();
   }
 
