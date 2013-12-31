@@ -10,3 +10,4 @@ module.exports.init = function(app) {
     'app-title': 'Mail Tester'
   });
 }
+

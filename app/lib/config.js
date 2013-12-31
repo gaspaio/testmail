@@ -2,6 +2,7 @@
 var config = require('nconf');
 var path = require('path');
 
+// TODO Extend app object with app.config
 module.exports.init = function(app) {
   var appdir = app.get('appdir');
   var basedir = app.get('basedir');
