@@ -3,9 +3,6 @@
 var util = require('util');
 
 exports.index = function(req, res, next) {
-
-  next(new Error("bingo"));
-
   res.render('app', {
     partials: {
       top: 'partials/top',
@@ -18,11 +15,18 @@ exports.index = function(req, res, next) {
 
 exports.post = function(req, res, next) {
 
+  if (!req.xhr) {
+    var err = new Error("Only AJAX post requests are allowed.");
+    err.statusCode = 400;
+    next(err);
+  }
+
   var errors = getFormErrors(req);
 
   if (null !== errors) {
     var err = new Error('Invalid field values');
     err.inner = errors;
+    err.statusCode = 400;
     next(err);
   }
 

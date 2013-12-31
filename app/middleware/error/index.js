@@ -1,20 +1,23 @@
 'use strict';
+var util = require('util');
+var http = require('http');
 
 
 module.exports.format = function(err, req, res, next) {
-
   err.statusCode = err.statusCode || 500;
   err.inner = err.inner || {};
+  next(err);
 }
 
 
 module.exports.handler = function(err, req, res, next) {
 
-  /*
-   * If ajax request, reply json
-   * if normal, show error page.
-   */
   res.status(err.statusCode);
-  res.json(JSON.stringify({msg: err.message, info: err.inner}));
+
+  if (req.xhr) {
+    res.json(JSON.stringify({msg: err.message, info: err.inner}));
+  }
+
+  res.send(util.format("%d %s : %s", err.statusCode, http.STATUS_CODES[err.statusCode], err.message));
 }
 

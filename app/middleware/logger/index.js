@@ -13,7 +13,7 @@ module.exports.errorLogger =  function(err, req, res, next) {
   }
 
   // Only log internal errors.
-  if (500 > statusCode) {
+  if (500 > err.statusCode) {
     next(err);
   }
 
