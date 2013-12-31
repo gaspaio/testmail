@@ -8,7 +8,8 @@
     "consolidate": "~0.10.0",
     "winston": "~0.7.2",
     "nconf": "~0.6.9",
-    "express-validator": "~1.0.1"
+    "express-validator": "~1.0.1",
+    "express-mailer": "~0.2.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

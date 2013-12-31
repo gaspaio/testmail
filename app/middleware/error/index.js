@@ -15,7 +15,7 @@ module.exports.handler = function(err, req, res, next) {
   res.status(err.statusCode);
 
   if (req.xhr) {
-    res.json(JSON.stringify({msg: err.message, info: err.inner}));
+    res.json({msg: err.message, info: err.inner});
   }
 
   res.send(util.format("%d %s : %s", err.statusCode, http.STATUS_CODES[err.statusCode], err.message));

@@ -2,7 +2,6 @@
 
 var util = require('util');
 
-
 module.exports.errorLogger =  function(err, req, res, next) {
 
   var logger = req.app.get('logger');
@@ -13,7 +12,7 @@ module.exports.errorLogger =  function(err, req, res, next) {
   }
 
   // Only log internal errors.
-  if (500 > err.statusCode) {
+  if (err.statusCode < 500) {
     next(err);
   }
 

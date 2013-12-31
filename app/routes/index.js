@@ -17,7 +17,7 @@ exports.post = function(req, res, next) {
 
   if (!req.xhr) {
     var err = new Error("Only AJAX post requests are allowed.");
-    err.statusCode = 400;
+    err.statusCode = 403;
     next(err);
   }
 
@@ -30,7 +30,7 @@ exports.post = function(req, res, next) {
     next(err);
   }
 
-  res.json({msg: util.format('Email sent to %s.', req.checkBody('sendTo'))});
+  res.json({msg: util.format('Email sent to %s.', req.body.sendTo)});
 }
 
 
@@ -45,7 +45,7 @@ function getFormErrors(req) {
     req.checkBody('sendTo').isEmail();
   }
 
-  if ('' !== req.body['replyTo']) {
+  if ('' !== req.body.replyTo) {
     req.checkBody('replyTo').isEmail();
   }
 
