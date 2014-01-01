@@ -2,4 +2,6 @@
 /bower_components/*
 /node_modules/*
 /log/app.log
+/app/config/*
+!/app/config/config.json.example
 /.idea
