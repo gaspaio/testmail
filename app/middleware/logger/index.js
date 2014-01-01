@@ -4,7 +4,7 @@ var util = require('util');
 
 module.exports.errorLogger =  function(err, req, res, next) {
 
-  var logger = req.app.get('logger');
+  var logger = req.app.logger;
 
   // No logger defined by app
   if (undefined === logger) {
@@ -25,7 +25,7 @@ module.exports.errorLogger =  function(err, req, res, next) {
 
 module.exports.requestLogger = function (req, res, next) {
 
-  var logger = req.app.get('logger');
+  var logger = req.app.logger;
 
   // No logger defined by app
   if (undefined === logger) {

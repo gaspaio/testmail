@@ -25,21 +25,19 @@ app.set('appdir',path.resolve(basedir, 'app'));
 config.init(app);
 
 // Default to production env
-app.set('env', process.env.NODE_ENV || app.get('config').get('env'));
+app.set('env', process.env.NODE_ENV || app.config.get('env'));
 // TODO Add port config
 
 /*
- * Configure our app
+ * Configure services
  */
-// Template engine
 templating.init(app);
-
-// Define logger
 logging.init(app);
-
-// Define Mailer
 mailing.init(app);
 
+/*
+ * Generic middlewares
+ */
 app.use(express.urlencoded());
 app.use(validator());
 
