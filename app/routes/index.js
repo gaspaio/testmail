@@ -9,11 +9,12 @@ exports.index = function(req, res, next) {
       bottom: 'partials/bottom'
     }
   });
-
 }
 
 
 exports.post = function(req, res, next) {
+
+  var mailer = req.app.mailer;
 
   if (!req.xhr) {
     var err = new Error("Only AJAX post requests are allowed.");
@@ -30,7 +31,26 @@ exports.post = function(req, res, next) {
     next(err);
   }
 
+  var mailData = buildMailData(req.body);
+
+  mailer.send(mailData);
+
   res.json({msg: util.format('Email sent to %s.', req.body.sendTo)});
+}
+
+
+function buildMailData(formFields) {
+  var mailData =  {
+    to: formFields.sendTo,
+    subject: formFields.subject,
+    html: formFields.htmlContent
+  };
+
+  if ('' !== formFields['replyTo']) {
+    mailData.replyTo = formFields['replyTo'];
+  }
+
+  return mailData;
 }
 
 

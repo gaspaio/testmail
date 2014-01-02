@@ -32,8 +32,15 @@ app.set('env', process.env.NODE_ENV || app.config.get('env'));
  * Configure services
  */
 templating.init(app);
-logging.init(app);
-mailing.init(app);
+
+app.logger = logging(
+  app.config
+);
+
+app.mailer = mailing(
+  app.config,
+  app.logger
+);
 
 /*
  * Generic middlewares

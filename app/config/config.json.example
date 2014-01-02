@@ -1,7 +1,11 @@
 {
   "mail": {
-    "service": "gmail",
-    "user": "SOMENAME",
-    "pass": "SOMEPASS"
+    "transport": "SMTP",
+    "options": {
+      "service": "gmail",
+      "user": "SOMENAME",
+      "pass": "SOMEPASS"
+    },
+    "from": "SOMEPASS"
   }
 }

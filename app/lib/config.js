@@ -13,7 +13,7 @@ module.exports.init = function(app) {
     .env()
     .file({file: path.resolve(appdir, 'config', 'config.json')})
     .defaults({
-      'log': path.resolve(basedir, 'log', 'app.log'),
+      'log': {file: path.resolve(basedir, 'log', 'app.log')},
       'env': 'production'
     });
 
