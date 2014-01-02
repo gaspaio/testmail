@@ -12,15 +12,12 @@ module.exports = function(config, logger) {
   var transportMethod = options.transport || 'STMP';
   var transport = nodemailer.createTransport(transportMethod, options.transport_options);
 
-  if (!('from' in options)) {
+  if (!('from' in options.mail_options)) {
     throw new Error('\"From\" field missing from mail configuration.');
   }
 
-  var mailOptionsDefault = {
-    from: options.from,
-    generateTextFromHTML: true
-  };
-
+  var mailOptionsDefault = options.mail_options;
+  mailOptionsDefault.generateTextFromHTML = true;
 
   /**
    * Send an email

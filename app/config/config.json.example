@@ -1,11 +1,13 @@
 {
   "mail": {
     "transport": "SMTP",
-    "options": {
+    "transport_options": {
       "service": "gmail",
       "user": "SOMENAME",
       "pass": "SOMEPASS"
     },
-    "from": "SOMEPASS"
+    "mail_options": {
+      "from": "SOMEPASS"
+    }
   }
 }
