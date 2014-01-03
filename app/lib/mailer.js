@@ -19,6 +19,7 @@ module.exports = function(config, logger) {
   var mailOptionsDefault = options.mail_options;
   mailOptionsDefault.generateTextFromHTML = true;
 
+
   /**
    * Send an email
    * @param {Object} data (the email headers and html content)

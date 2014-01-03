@@ -33,7 +33,7 @@ module.exports.requestLogger = function (req, res, next) {
   }
 
   // Only log requests in development mode
-  if ('develpment' === req.app.get('env')) {
+  if ('develpment' === req.app.config.get('env')) {
     var msg = util.format('HTTP %s %s', req.method, req.url);
     logger.log('info', msg, req.headers);
   }

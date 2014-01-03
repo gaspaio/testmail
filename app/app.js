@@ -26,6 +26,7 @@ config.init(app);
 
 // Default to production env
 app.set('env', process.env.NODE_ENV || app.config.get('env'));
+app.config.set('env', app.get('env'));
 // TODO Add port config
 
 /*
