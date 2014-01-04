@@ -1,8 +1,13 @@
-// Base directory
-var config = require('nconf');
+chai = require('chai');
+expect = chai.expect;
 
-var app = {
-  basedir: path.resolve(__dirname, '..'),
-  appdir: path.resolve(__dirname, '..', 'app')
-};
+path = require('path');
 
+
+appGlobals = {};
+appGlobals.basedir = path.resolve(__dirname, '..','..');
+appGlobals.appdir = path.resolve(appGlobals.basedir, 'app');
+
+process.env.NODE_ENV = 'test';
+
+console.log("starting tests");

@@ -19,6 +19,8 @@
     "node-sass": "~0.7.0",
     "supervisor": "~0.5.6",
     "bower": "~1.2.8",
-    "mocha": "~1.16.2"
+    "mocha": "~1.16.2",
+    "chai": "~1.8.1",
+    "supertest": "~0.8.2"
   }
 }

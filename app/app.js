@@ -16,18 +16,10 @@ var routes = require('./routes');
 
 var app = module.exports = express();
 
-// Base directory
-var basedir = path.resolve(__dirname, '..');
-app.set('basedir', basedir);
-app.set('appdir',path.resolve(basedir, 'app'));
-
 // Set configuration
 config.init(app);
 
-// Default to production env
-app.set('env', process.env.NODE_ENV || app.config.get('env'));
-app.config.set('env', app.get('env'));
-// TODO Add port config
+var basedir = app.get('basedir');
 
 /*
  * Configure services
@@ -35,7 +27,8 @@ app.config.set('env', app.get('env'));
 templating.init(app);
 
 app.logger = logging(
-  app.config
+  app.config,
+  app.get('basedir')
 );
 
 app.mailer = mailing(

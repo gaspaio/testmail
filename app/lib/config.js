@@ -2,20 +2,27 @@
 var config = require('nconf');
 var path = require('path');
 
-// TODO Extend app object with app.config
-
 module.exports.init = function(app) {
-  var appdir = app.get('appdir');
-  var basedir = app.get('basedir');
+
+  app.set('basedir', path.resolve(__dirname, '..', '..'));
+  app.set('appdir',path.resolve(__dirname, '..'));
+  var confdir = path.resolve(app.get('appdir'), 'config');
 
   config
     .argv()
     .env()
-    .file({file: path.resolve(appdir, 'config', 'config.json')})
+    .file('envFile', {
+      file: path.resolve(confdir, 'config.' + (config.get('NODE_ENV') || 'development') + '.json')
+    })
+    .file('defaultFile', {
+      file: path.resolve(confdir, 'config.json')
+    })
     .defaults({
-      'log': {file: path.resolve(basedir, 'log', 'app.log')},
       'env': 'production'
     });
 
+  // TODO Add port config
+
+  app.set('env', process.env.NODE_ENV || config.get('env'));
   app.config = config;
 }

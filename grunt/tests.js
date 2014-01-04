@@ -14,9 +14,9 @@ module.exports = function (grunt) {
       cmd: 'node_modules/.bin/mocha',
       args: [
 //        '--reporter', reporter,
-        '--require', 'test/bootstrap.js',
+        '--require', 'test/app/bootstrap.js',
         '--check-leaks',
-        'test/app/unit/**/*.js'
+        'test/app/**/*.js'
       ],
       opts: {
         stdio: 'inherit',

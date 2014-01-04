@@ -10,4 +10,7 @@
       "from": "SOMEPASS"
     }
   }
+  "log": {
+    "transport": "File"
+  }
 }
