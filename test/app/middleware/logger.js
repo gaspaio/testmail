@@ -9,12 +9,12 @@ var logger = require(path.join(appGlobals.appdir, 'middleware', 'logger'));
 
 describe('Logger middleware', function() {
 
-  var app;
+  var app = express;
   var log;
 
   beforeEach(function() {
 
-    // Create and configure app
+    // Recreate and configure app
     app = express();
     config.init(app);
     app.logger = logging(
@@ -39,6 +39,23 @@ describe('Logger middleware', function() {
         expect(app.logger.flush()).to.have.length(0);
         done();
       });
-  })
+  });
+
+
+  it('should log errors', function(done) {
+    app.config.set('env', 'production');
+    app.use('/somepage', function(req, res, next){
+      next(new Error('Some error'));
+    });
+    app.use(logger.errorLogger);
+
+    request(app)
+      .get('/somepage')
+      .end(function(err, res) {
+        if (err) return done(err);
+        expect(app.logger.flush()).to.have.length(1);
+        done();
+      });
+  });
 
 });

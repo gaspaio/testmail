@@ -1,10 +1,12 @@
 'use strict';
 
 var util = require('util');
+var winston = require('winston');
 
 module.exports.errorLogger =  function(err, req, res, next) {
 
   var logger = req.app.logger;
+  var statusCode = err.statusCode || 500;
 
   // No logger defined by app
   if (undefined === logger) {
@@ -12,12 +14,12 @@ module.exports.errorLogger =  function(err, req, res, next) {
   }
 
   // Only log internal errors.
-  if (err.statusCode < 500) {
+  if (statusCode < 500) {
     next(err);
   }
 
   // Let winston gather all the error data, if none is present.
-  err.inner = err.inner || logger.exception.getAllInfo(err);
+  err.inner = err.inner || winston.exception.getAllInfo(err);
   logger.error('Exception', err.inner);
   next(err);
 };
