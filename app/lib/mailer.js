@@ -46,7 +46,8 @@ module.exports = function(config, logger) {
       var errmsg = util.format('%s : %s', error.name, error.message)
       logger.error(errmsg, error);
     }
-    else {
+    else if (this
+             && '_message' in this) {
       var msg = this._message;
       logger.info(util.format('Sucessfully send email to adress %s : %s', msg.to, msg.subject));
     }

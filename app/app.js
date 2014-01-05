@@ -14,45 +14,56 @@ var logger = require('./middleware/logger');
 var error = require('./middleware/error');
 var routes = require('./routes');
 
-var app = module.exports = express();
+module.exports = function() {
+  var app = express();
 
-// Set configuration
-config.init(app);
+  // Set configuration
+  config.init(app);
+  var basedir = app.get('basedir');
 
-var basedir = app.get('basedir');
+  /*
+  * Configure services
+  */
+  templating.init(app);
 
-/*
- * Configure services
- */
-templating.init(app);
+  app.logger = logging(
+    app.config,
+    app.get('basedir')
+  );
 
-app.logger = logging(
-  app.config,
-  app.get('basedir')
-);
+  app.mailer = mailing(
+    app.config,
+    app.logger
+  );
 
-app.mailer = mailing(
-  app.config,
-  app.logger
-);
+  /*
+   * Generic middlewares
+   */
+  app.use(express.urlencoded());
+  app.use(validator());
 
-/*
- * Generic middlewares
- */
-app.use(express.urlencoded());
-app.use(validator());
+  // Static files
+  app.use('/bower_components', express.static(path.resolve(basedir, 'bower_components')));
+  app.use('/assets', express.static(path.resolve(basedir, 'public', 'assets')));
 
-// Static files
-app.use('/bower_components', express.static(path.resolve(basedir, 'bower_components')));
-app.use('/assets', express.static(path.resolve(basedir, 'public', 'assets')));
+  // Client-side app
+  app.use(express.static(path.resolve(basedir, 'client')));
 
-// Client-side app
-app.use(express.static(path.resolve(basedir, 'client')));
+  // Load Routes
+  app.use(logger.requestLogger);
+  app.get('/', routes.index);
+  app.post('/', routes.post);
+  app.use(error.format);
+  app.use(logger.errorLogger);
+  app.use(error.handler);
 
-// Load Routes
-app.use(logger.requestLogger);
-app.get('/', routes.index);
-app.post('/', routes.post);
-app.use(error.format);
-app.use(logger.errorLogger);
-app.use(error.handler);
+  return app;
+}
+
+
+
+
+
+
+
+

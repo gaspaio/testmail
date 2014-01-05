@@ -1,9 +1,9 @@
 'use strict';
 
 var http = require('http');
-var app = require('./app');
+var mailerApp = require('./app');
 
-var server = http.createServer(app);
+var server = http.createServer(mailerApp());
 
 server.listen('3000');//, partial(logger.info, 'CMS is ready'));
 

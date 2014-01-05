@@ -60,12 +60,14 @@ function getFormErrors(req) {
 
   req.checkBody('sendTo').notEmpty();
   errors = req.validationErrors(true);
-  if (errors !== null
-      && !errors.hasOwnProperty('sendTo')) {
+
+  if (errors === null
+      || !errors.hasOwnProperty('sendTo')) {
     req.checkBody('sendTo').isEmail();
   }
 
-  if ('' !== req.body.replyTo) {
+  if (('replyTo' in req.body)
+      && '' !== req.body.replyTo) {
     req.checkBody('replyTo').isEmail();
   }
 

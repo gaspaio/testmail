@@ -24,7 +24,7 @@ describe('Logger middleware', function() {
   });
 
 
-  it('should not log requests in production mode', function(done) {
+  it('does not log requests in production mode', function(done) {
     app.config.set('env', 'production');
     app.use(logger.requestLogger);
 
@@ -42,7 +42,7 @@ describe('Logger middleware', function() {
   });
 
 
-  it('should log errors', function(done) {
+  it('logs errors in production mode', function(done) {
     app.config.set('env', 'production');
     app.use('/somepage', function(req, res, next){
       next(new Error('Some error'));
