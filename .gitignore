@@ -4,4 +4,5 @@
 /log/app.log
 /app/config/*
 !/app/config/config.json.example
+!/app/config/config.test.json
 /.idea

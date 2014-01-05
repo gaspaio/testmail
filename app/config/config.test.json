@@ -1,0 +1,12 @@
+{
+  "mail": {
+    "transport": "STUB",
+    "transport_options": {},
+    "mail_options": {
+      "from": "rodolfo.ripado@gmail.com"
+    }
+  },
+  "log": {
+    "transport": "Memory"
+  }
+}
